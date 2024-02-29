@@ -1,0 +1,51 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        // Function to load content dynamically
+        function loadContent(url) {
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function(response) {
+                    $('main').html(response);
+                },
+                error: function() {
+                    $('main').html('<p>Error loading content.</p>');
+                }
+            });
+        }
+
+        // Event listener for navigation links
+        $(document).on('click', 'nav a', function(e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+            loadContent(url);
+        });
+
+        // Initial content load (assuming you have a default view)
+        $(document).ready(function() {
+            loadContent('view_tasks.php');
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Task Management System</h1>
+        <nav>
+            <a href="view_tasks.php">View Tasks</a>
+            <a href="add_task.php">Add Task</a>
+            
+        </nav>
+    </header>
+    <main>
+        <!-- Content will be dynamically loaded here based on navigation -->
+    </main>
+</body>
+</html>
